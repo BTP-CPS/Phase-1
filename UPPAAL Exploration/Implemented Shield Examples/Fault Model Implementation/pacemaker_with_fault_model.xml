@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+broadcast chan AS, VS, AP, VP, AP_p, to;
+clock t, xp, xm1, xm2;
+clock x;
+
+// T1 &gt;= T
+const int T = 50;
+const int T1 = 50;
+bool error, recovered;
+int states=0, statem1=0, statem2=0, successful=0;</declaration>
+	<template>
+		<name x="5" y="5">Env</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="0" y="0">
+		</location>
+		<init ref="id0"/>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-42" y="-76">AS!</label>
+			<nail x="8" y="-68"/>
+			<nail x="-59" y="-34"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-68" y="51">VP!</label>
+			<nail x="-17" y="68"/>
+			<nail x="-68" y="25"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="67" y="-18">VS!</label>
+			<nail x="59" y="-34"/>
+			<nail x="59" y="42"/>
+		</transition>
+	</template>
+	<template>
+		<name>Sys</name>
+		<location id="id1" x="-280" y="-85">
+		</location>
+		<init ref="id1"/>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-195" y="-102">AP!</label>
+			<nail x="-204" y="-127"/>
+			<nail x="-204" y="-42"/>
+		</transition>
+	</template>
+	<template>
+		<name>mSpec</name>
+		<location id="id2" x="-875" y="-578">
+			<name x="-909" y="-620">A_sense</name>
+		</location>
+		<location id="id3" x="-697" y="-578">
+			<name x="-722" y="-620">V_sense</name>
+			<label kind="invariant" x="-714" y="-637">x &lt;= T</label>
+		</location>
+		<location id="id4" x="-527" y="-578" color="#ffa500">
+			<name x="-544" y="-620">ERR</name>
+		</location>
+		<init ref="id2"/>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-680" y="-484">VP?</label>
+			<label kind="assignment" x="-672" y="-467">x := 0</label>
+			<nail x="-748" y="-433"/>
+			<nail x="-570" y="-501"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-790" y="-697">VP?</label>
+			<label kind="assignment" x="-799" y="-714">x := 0</label>
+			<nail x="-783" y="-680"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-620" y="-603">x &lt; T</label>
+			<label kind="synchronisation" x="-620" y="-578">AP?</label>
+			<label kind="assignment" x="-629" y="-561">error = 1, x = 0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-620" y="-663">x &gt; T</label>
+			<label kind="synchronisation" x="-612" y="-637">to?</label>
+			<label kind="assignment" x="-637" y="-680">error = 1, x = 0</label>
+			<nail x="-603" y="-646"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-799" y="-484">x == T</label>
+			<label kind="synchronisation" x="-790" y="-518">AP?</label>
+			<nail x="-782" y="-484"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id2"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-943" y="-654">AP?</label>
+			<nail x="-960" y="-603"/>
+			<nail x="-875" y="-662"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-790" y="-561">AS?</label>
+			<nail x="-782" y="-535"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-688" y="-527">VS?</label>
+			<label kind="assignment" x="-697" y="-510">x := 0</label>
+			<nail x="-714" y="-476"/>
+			<nail x="-629" y="-502"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id2"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-952" y="-527">AS?</label>
+			<nail x="-960" y="-552"/>
+			<nail x="-892" y="-501"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-799" y="-646">VS?</label>
+			<label kind="assignment" x="-799" y="-620">x := 0</label>
+			<nail x="-782" y="-629"/>
+		</transition>
+	</template>
+	<template>
+		<name>Fm1</name>
+		<location id="id5" x="-654" y="-25">
+			<name x="-688" y="-67">A_sense1</name>
+		</location>
+		<location id="id6" x="-374" y="-25">
+			<name x="-399" y="-67">V_sense1</name>
+			<label kind="invariant" x="-391" y="-84">xm1 &lt;= T</label>
+		</location>
+		<location id="id7" x="-178" y="-25" color="#ffa500">
+			<name x="-195" y="-8">ERR1</name>
+		</location>
+		<location id="id8" x="4" y="-34">
+			<name x="-30" y="-76">A_sense2</name>
+		</location>
+		<location id="id9" x="272" y="-34">
+			<name x="247" y="-76">V_sense2</name>
+			<label kind="invariant" x="255" y="-93">xm1 &lt;= T</label>
+		</location>
+		<location id="id10" x="484" y="-34" color="#ffa500">
+			<name x="467" y="-76">ERR2</name>
+		</location>
+		<init ref="id5"/>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-552" y="51">xm1 == T</label>
+			<label kind="synchronisation" x="-535" y="68">AP?</label>
+			<label kind="assignment" x="-561" y="102">statem1 = 0</label>
+			<nail x="-527" y="102"/>
+		</transition>
+		<transition controllable="false" color="#ff00ff">
+			<source ref="id6"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-59" y="-178">xm1 &lt; T</label>
+			<label kind="synchronisation" x="-34" y="-212">AP?</label>
+			<nail x="-374" y="-187"/>
+			<nail x="280" y="-187"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-365" y="110">VP?</label>
+			<label kind="assignment" x="-408" y="85">xm1 := 0, statem1 = 1</label>
+			<nail x="-425" y="120"/>
+			<nail x="-246" y="76"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-544" y="-93">VP?</label>
+			<label kind="assignment" x="-595" y="-127">xm1 := 0, statem1 = 1</label>
+			<nail x="-535" y="-102"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-289" y="-68">xm1 &gt; T</label>
+			<label kind="synchronisation" x="-272" y="-25">to?</label>
+			<label kind="assignment" x="-306" y="-51">statem1 = 2</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-739" y="-101">AP?</label>
+			<label kind="assignment" x="-747" y="-118">statem1 = 0</label>
+			<nail x="-739" y="-50"/>
+			<nail x="-654" y="-109"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-543" y="25">AS?</label>
+			<label kind="assignment" x="-560" y="8">statem1 = 0</label>
+			<nail x="-535" y="51"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-365" y="26">VS?</label>
+			<label kind="assignment" x="-399" y="51">xm1 := 0, statem1 = 1</label>
+			<nail x="-391" y="77"/>
+			<nail x="-306" y="60"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-731" y="26">AS?</label>
+			<label kind="assignment" x="-756" y="43">statem1 = 0</label>
+			<nail x="-739" y="1"/>
+			<nail x="-671" y="52"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-544" y="-51">VS?</label>
+			<label kind="assignment" x="-595" y="-25">xm1 := 0, statem1 = 1</label>
+			<nail x="-535" y="-26"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="281" y="101">VP?</label>
+			<label kind="assignment" x="247" y="76">xm1 := 0, statem1 = 1</label>
+			<nail x="221" y="111"/>
+			<nail x="400" y="67"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="127" y="-102">VP?</label>
+			<label kind="assignment" x="76" y="-136">xm1 := 0, statem1 = 1</label>
+			<nail x="136" y="-110"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id10"/>
+			<label kind="guard" x="365" y="-34">xm1 &lt; T</label>
+			<label kind="synchronisation" x="382" y="-59">AP?</label>
+			<label kind="assignment" x="357" y="-17">statem1 = 2</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id10"/>
+			<label kind="guard" x="374" y="-144">xm1 &gt; T</label>
+			<label kind="synchronisation" x="391" y="-110">to?</label>
+			<label kind="assignment" x="365" y="-127">statem1 = 2</label>
+			<nail x="399" y="-93"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="guard" x="110" y="102">xm1 == T</label>
+			<label kind="synchronisation" x="127" y="68">AP?</label>
+			<label kind="assignment" x="102" y="51">statem1 = 0</label>
+			<nail x="136" y="102"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id8"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="-76" y="-102">AP?</label>
+			<label kind="assignment" x="-102" y="-119">statem1 = 0</label>
+			<nail x="-81" y="-59"/>
+			<nail x="4" y="-118"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="127" y="17">AS?</label>
+			<label kind="assignment" x="102" y="0">statem1 = 0</label>
+			<nail x="136" y="42"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="281" y="17">VS?</label>
+			<label kind="assignment" x="255" y="34">xm1 := 0, statem1 = 1</label>
+			<nail x="255" y="68"/>
+			<nail x="340" y="51"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id8"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="-73" y="17">AS?</label>
+			<label kind="assignment" x="-98" y="34">statem1 = 0</label>
+			<nail x="-81" y="-8"/>
+			<nail x="-13" y="43"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="127" y="-59">VS?</label>
+			<label kind="assignment" x="85" y="-34">xm1 := 0, statem1 = 1</label>
+			<nail x="157" y="-34"/>
+		</transition>
+	</template>
+	<template>
+		<name>Fm2</name>
+		<location id="id11" x="-374" y="-25">
+			<name x="-399" y="-67">V_sense1</name>
+			<label kind="invariant" x="-391" y="-84">xm2 &lt;= T</label>
+		</location>
+		<location id="id12" x="272" y="-34">
+			<name x="247" y="-76">V_sense2</name>
+			<label kind="invariant" x="255" y="-93">xm2 &lt;= T</label>
+		</location>
+		<location id="id13" x="-654" y="-25">
+			<name x="-688" y="-67">A_sense1</name>
+		</location>
+		<location id="id14" x="-178" y="-25" color="#ffa500">
+			<name x="-195" y="-8">ERR1</name>
+		</location>
+		<location id="id15" x="4" y="-34">
+			<name x="-30" y="-76">A_sense2</name>
+		</location>
+		<location id="id16" x="484" y="-34" color="#ffa500">
+			<name x="467" y="-76">ERR2</name>
+		</location>
+		<init ref="id13"/>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-561" y="59">xm2 == T</label>
+			<label kind="synchronisation" x="-544" y="76">AP?</label>
+			<label kind="assignment" x="-561" y="102">statem2 = 0</label>
+			<nail x="-535" y="102"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id11"/>
+			<target ref="id14"/>
+			<label kind="guard" x="-297" y="-102">xm2 &gt; T</label>
+			<label kind="synchronisation" x="-280" y="-68">to?</label>
+			<label kind="assignment" x="-306" y="-119">statem2 = 2</label>
+			<nail x="-272" y="-76"/>
+		</transition>
+		<transition controllable="false" color="#ff00ff">
+			<source ref="id11"/>
+			<target ref="id15"/>
+			<label kind="guard" x="-212" y="-238">xm2 &lt; T</label>
+			<label kind="synchronisation" x="-195" y="-221">AP?</label>
+			<label kind="assignment" x="-221" y="-195">statem2 = 0</label>
+			<nail x="-374" y="-195"/>
+			<nail x="8" y="-195"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id11"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-365" y="110">VP?</label>
+			<label kind="assignment" x="-408" y="85">xm2 := 0, statem2 = 1</label>
+			<nail x="-425" y="120"/>
+			<nail x="-246" y="76"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id13"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-544" y="-93">VP?</label>
+			<label kind="assignment" x="-595" y="-127">xm2 := 0, statem2 = 1</label>
+			<nail x="-535" y="-102"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id13"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-739" y="-101">AP?</label>
+			<label kind="assignment" x="-747" y="-118">statem2 = 0</label>
+			<nail x="-739" y="-50"/>
+			<nail x="-654" y="-109"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id11"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-543" y="25">AS?</label>
+			<label kind="assignment" x="-561" y="8">statem2 = 0</label>
+			<nail x="-535" y="51"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id11"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-365" y="26">VS?</label>
+			<label kind="assignment" x="-399" y="51">xm2 := 0, statem2 = 1</label>
+			<nail x="-391" y="77"/>
+			<nail x="-306" y="60"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id13"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-731" y="26">AS?</label>
+			<label kind="assignment" x="-756" y="43">statem2 = 0</label>
+			<nail x="-739" y="1"/>
+			<nail x="-671" y="52"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id13"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-544" y="-51">VS?</label>
+			<label kind="assignment" x="-595" y="-25">xm2 := 0, statem2 = 1</label>
+			<nail x="-535" y="-26"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="281" y="101">VP?</label>
+			<label kind="assignment" x="247" y="76">xm2 := 0, statem2 = 1</label>
+			<nail x="221" y="111"/>
+			<nail x="400" y="67"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id15"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="127" y="-102">VP?</label>
+			<label kind="assignment" x="76" y="-136">xm2 := 0, statem2 = 1</label>
+			<nail x="136" y="-110"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id16"/>
+			<label kind="guard" x="365" y="-34">xm2 &lt; T</label>
+			<label kind="synchronisation" x="382" y="-59">AP?</label>
+			<label kind="assignment" x="357" y="-17">statem2 = 2</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id16"/>
+			<label kind="guard" x="374" y="-144">xm2 &gt; T</label>
+			<label kind="synchronisation" x="391" y="-110">to?</label>
+			<label kind="assignment" x="365" y="-127">statem2 = 2</label>
+			<nail x="399" y="-93"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id15"/>
+			<label kind="guard" x="110" y="102">xm2 == T</label>
+			<label kind="synchronisation" x="127" y="68">AP?</label>
+			<label kind="assignment" x="102" y="51">statem2 = 0</label>
+			<nail x="136" y="102"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id15"/>
+			<target ref="id15"/>
+			<label kind="synchronisation" x="-76" y="-102">AP?</label>
+			<label kind="assignment" x="-102" y="-119">statem2 = 0</label>
+			<nail x="-81" y="-59"/>
+			<nail x="4" y="-118"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id15"/>
+			<label kind="synchronisation" x="127" y="17">AS?</label>
+			<label kind="assignment" x="102" y="0">statem2 = 0</label>
+			<nail x="136" y="42"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="281" y="17">VS?</label>
+			<label kind="assignment" x="255" y="34">xm2 := 0, statem2 = 1</label>
+			<nail x="255" y="68"/>
+			<nail x="340" y="51"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id15"/>
+			<target ref="id15"/>
+			<label kind="synchronisation" x="-73" y="17">AS?</label>
+			<label kind="assignment" x="-98" y="34">statem2 = 0</label>
+			<nail x="-81" y="-8"/>
+			<nail x="-13" y="43"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id15"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="127" y="-59">VS?</label>
+			<label kind="assignment" x="85" y="-34">xm2 := 0, statem2 = 1</label>
+			<nail x="157" y="-34"/>
+		</transition>
+	</template>
+	<template>
+		<name>To</name>
+		<location id="id17" x="0" y="0">
+		</location>
+		<init ref="id17"/>
+		<transition controllable="false">
+			<source ref="id17"/>
+			<target ref="id17"/>
+			<label kind="synchronisation" x="-42" y="-93">to!</label>
+			<nail x="-68" y="-59"/>
+			<nail x="8" y="-85"/>
+		</transition>
+	</template>
+	<template>
+		<name>Shield</name>
+		<location id="id18" x="-280" y="-68">
+		</location>
+		<location id="id19" x="-340" y="-195">
+		</location>
+		<init ref="id18"/>
+		<transition controllable="false">
+			<source ref="id18"/>
+			<target ref="id18"/>
+			<label kind="synchronisation" x="-255" y="59">VP?</label>
+			<nail x="-280" y="59"/>
+			<nail x="-212" y="42"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id18"/>
+			<target ref="id18"/>
+			<label kind="synchronisation" x="-374" y="51">VS?</label>
+			<nail x="-382" y="17"/>
+			<nail x="-314" y="68"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id18"/>
+			<target ref="id18"/>
+			<label kind="synchronisation" x="-442" y="-42">AS?</label>
+			<nail x="-416" y="-68"/>
+			<nail x="-391" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-144" y="-51">states==1 &amp;&amp; xp==T</label>
+			<label kind="synchronisation" x="-144" y="-34">AP_p!</label>
+			<nail x="-144" y="-68"/>
+			<nail x="-161" y="8"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-177" y="-173">error == 1</label>
+			<label kind="synchronisation" x="-220" y="-148">AP_p!</label>
+			<nail x="-204" y="-178"/>
+			<nail x="-153" y="-119"/>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-348" y="-127">error == 1</label>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id18"/>
+			<label kind="synchronisation" x="-399" y="-161">AP_p!</label>
+			<nail x="-365" y="-110"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id18"/>
+			<target ref="id19"/>
+			<label kind="guard" x="-289" y="-187">error == 0</label>
+			<label kind="synchronisation" x="-297" y="-153">AP?</label>
+			<nail x="-263" y="-153"/>
+		</transition>
+	</template>
+	<template>
+		<name>mSpec_p</name>
+		<location id="id20" x="-697" y="-85">
+			<name x="-731" y="-127">A_sense</name>
+		</location>
+		<location id="id21" x="-340" y="-93">
+			<name x="-365" y="-135">V_sense</name>
+			<label kind="invariant" x="-357" y="-152">xp &lt;= T</label>
+		</location>
+		<location id="id22" x="-136" y="-93" color="#ffa500">
+			<name x="-153" y="-135">ERR</name>
+		</location>
+		<init ref="id20"/>
+		<transition controllable="false">
+			<source ref="id21"/>
+			<target ref="id21"/>
+			<label kind="synchronisation" x="-331" y="42">VP?</label>
+			<label kind="assignment" x="-365" y="17">xp := 0, states = 1</label>
+			<nail x="-391" y="52"/>
+			<nail x="-212" y="8"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id20"/>
+			<target ref="id21"/>
+			<label kind="synchronisation" x="-553" y="-187">VP?</label>
+			<label kind="assignment" x="-586" y="-153">xp := 0, states = 1</label>
+			<nail x="-544" y="-161"/>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-238" y="-93">xp &lt; T</label>
+			<label kind="synchronisation" x="-238" y="-119">AP_p?</label>
+			<label kind="assignment" x="-246" y="-76">states = 2</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id21"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-238" y="-204">xp &gt; T</label>
+			<label kind="synchronisation" x="-229" y="-170">to?</label>
+			<label kind="assignment" x="-246" y="-187">states = 2</label>
+			<nail x="-204" y="-153"/>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-569" y="51">xp == T</label>
+			<label kind="synchronisation" x="-561" y="17">AP_p?</label>
+			<label kind="assignment" x="-569" y="0">states = 0</label>
+			<nail x="-544" y="51"/>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id20"/>
+			<label kind="synchronisation" x="-782" y="-161">AP_p?</label>
+			<label kind="assignment" x="-790" y="-178">states = 0</label>
+			<nail x="-782" y="-110"/>
+			<nail x="-697" y="-169"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id21"/>
+			<target ref="id20"/>
+			<label kind="synchronisation" x="-552" y="-34">AS?</label>
+			<label kind="assignment" x="-569" y="-51">states = 0</label>
+			<nail x="-544" y="-8"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id21"/>
+			<target ref="id21"/>
+			<label kind="synchronisation" x="-331" y="-42">VS?</label>
+			<label kind="assignment" x="-357" y="-25">xp := 0, states = 1</label>
+			<nail x="-357" y="9"/>
+			<nail x="-272" y="-8"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id20"/>
+			<target ref="id20"/>
+			<label kind="synchronisation" x="-774" y="-34">AS?</label>
+			<label kind="assignment" x="-799" y="-17">states = 0</label>
+			<nail x="-782" y="-59"/>
+			<nail x="-714" y="-8"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id20"/>
+			<target ref="id21"/>
+			<label kind="synchronisation" x="-544" y="-110">VS?</label>
+			<label kind="assignment" x="-586" y="-85">xp := 0, states = 1</label>
+			<nail x="-544" y="-85"/>
+		</transition>
+	</template>
+	<template>
+		<name>RM</name>
+		<location id="id23" x="0" y="0">
+		</location>
+		<init ref="id23"/>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id23"/>
+			<label kind="guard" x="-391" y="-8">error==1 &amp;&amp; (statem1==2)&amp;&amp; (statem2==2)</label>
+			<label kind="assignment" x="-340" y="8">recovered = 1, successful = 1</label>
+			<nail x="-102" y="34"/>
+			<nail x="-102" y="-25"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id23"/>
+			<label kind="guard" x="-161" y="110">error==1 &amp;&amp; (statem1==2)&amp;&amp; (statem2==states &amp;&amp; xm2==xp)</label>
+			<label kind="assignment" x="-76" y="127">recovered = 1, successful = 1</label>
+			<nail x="34" y="102"/>
+			<nail x="-17" y="102"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id23"/>
+			<label kind="guard" x="110" y="-25">error==1 &amp;&amp; (statem1==states&amp;&amp; xm1==xp)&amp;&amp; (statem2==2)</label>
+			<label kind="assignment" x="187" y="-8">recovered = 1, successful = 1</label>
+			<nail x="102" y="-34"/>
+			<nail x="102" y="17"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id23"/>
+			<label kind="guard" x="-187" y="-153">error==1 &amp;&amp; (statem1==states&amp;&amp; xm1==xp)&amp;&amp; (statem2==states &amp;&amp; xm2==xp)</label>
+			<label kind="assignment" x="-85" y="-136">recovered = 1, successful = 1</label>
+			<nail x="-25" y="-110"/>
+			<nail x="25" y="-110"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system mSpec, Env, Sys, Shield, To, Fm1, Fm2, RM, mSpec_p;</system>
+	<queries>
+		<query>
+			<formula>strategy safe = control: A[] not mSpec_p.ERR</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] mSpec_p.V_sense imply xp &lt;= T under safe</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>strategy REC = control: A[] not mSpec_p.ERR and ((not mSpec.ERR) or x &lt;= T1 or recovered)
+</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; successful ==1 under REC</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>saveStrategy("pacemaker_fault_model.txt", REC)
+</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

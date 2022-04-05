@@ -1,0 +1,537 @@
+Initial state:
+( mSpec.l0 mSpec_p.l0_p To._id7 Env._id12 Shield._id4 ) error=0 states=0 
+(#time==ta && ta==tv && tv==ta_p && ta_p==tv_p && tv_p==0)
+Note: The 'strategy' is not guaranteed to be a strategy.
+
+Strategy to avoid losing:
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id16 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id16 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id14 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id16 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id13 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id15 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id15 Shield._id6 ) error=0 states=1 
+While you are in	(tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id13 Shield._id5 ) error=0 states=2 
+While you are in	(tv<=ta_p && ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id15 Shield._id4 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id16 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id16 Shield._id6 ) error=1 states=1 
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id14 Shield._id4 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { error == 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id13 Shield._id4 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id14 Shield._id6 ) error=0 states=1 
+While you are in	(ta<=tv_p && tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id16 Shield._id4 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id16 Shield._id5 ) error=0 states=2 
+While you are in	(ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id16 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && ta<=50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id15 Shield._id5 ) error=0 states=2 
+While you are in	(tv<=ta_p && ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id15 Shield._id4 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id14 Shield._id6 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id13 Shield._id5 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id16 Shield._id6 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id16 Shield._id5 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id16 Shield._id4 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { error == 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id15 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && tv<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id16 Shield._id6 ) error=0 states=1 
+While you are in	(ta<=tv_p && tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id14 Shield._id5 ) error=0 states=2 
+While you are in	(tv<=50 && ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id14 Shield._id5 ) error=0 states=2 
+While you are in	(ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id13 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && ta<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id13 Shield._id4 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id13 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id12 Shield._id4 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id15 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id16 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id13 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id14 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id16 Shield._id5 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id15 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id16 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && ta<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id14 Shield._id6 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id14 Shield._id6 ) error=1 states=1 
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id16 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && tv<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id15 Shield._id5 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id15 Shield._id5 ) error=1 states=2 
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id14 Shield._id5 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id14 Shield._id4 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id14 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id14 Shield._id4 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id14 Shield._id5 ) error=0 states=2 
+While you are in	(ta<=50 && ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id15 Shield._id5 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id15 Shield._id6 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id16 Shield._id6 ) error=0 states=2 
+When you are in (tv==50 && 50<=tv_p && tv==ta_p && ta_p==50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id14 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && tv<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id15 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id13 Shield._id5 ) error=1 states=2 
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id15 Shield._id4 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { error == 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id15 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && tv<=50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id13 Shield._id6 ) error=0 states=1 
+While you are in	(tv<=50 && tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id14 Shield._id4 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id14 Shield._id6 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id13 Shield._id4 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { error == 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id15 Shield._id6 ) error=1 states=1 
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id15 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id14 Shield._id4 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { error == 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id13 Shield._id4 ) error=1 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id14 Shield._id6 ) error=0 states=2 
+When you are in (tv==50 && 50<=tv_p && tv==ta_p && ta_p==50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id14 Shield._id5 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id16 Shield._id5 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id13 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && tv<=50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id15 Shield._id6 ) error=0 states=1 
+While you are in	(tv<=50 && tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id16 Shield._id6 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id14 Shield._id5 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id16 Shield._id4 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id16 Shield._id5 ) error=0 states=2 
+While you are in	(tv<=50 && ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id15 Shield._id6 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id15 Shield._id5 ) error=0 states=1 
+When you are in (ta==50 && 50<=ta_p && ta==tv_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id16 Shield._id5 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id13 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id13 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id16 Shield._id6 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id15 Shield._id6 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id16 Shield._id5 ) error=1 states=2 
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id16 Shield._id4 ) error=1 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id13 Shield._id6 ) error=0 states=1 
+While you are in	(tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id14 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && ta<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id15 Shield._id4 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { error == 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id15 Shield._id6 ) error=0 states=1 
+While you are in	(ta<=50 && tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id13 Shield._id5 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id14 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id15 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id15 Shield._id4 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id13 Shield._id5 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id13 Shield._id6 ) error=0 states=1 
+While you are in	(ta<=50 && tv_p<=50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id13 Shield._id4 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { error == 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id14 Shield._id5 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id14 Shield._id4 ) error=1 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id16 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id14 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id13 Shield._id6 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id15 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && ta<=50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id16 Shield._id5 ) error=0 states=2 
+While you are in	(ta<=50 && ta_p<=50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id16 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id14 Shield._id5 ) error=1 states=2 
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id16 Shield._id5 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id13 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id16 Shield._id4 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { error == 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id16 Shield._id4 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id13 Shield._id4 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id15 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l0_p To._id7 Env._id13 Shield._id6 ) error=0 states=0 
+While you are in	(ta<=50 && ta<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id13 Shield._id6 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id16 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id13 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id14 Shield._id5 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id13 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id15 Shield._id5 ) error=1 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id5->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l0 mSpec_p.l1_p To._id7 Env._id14 Shield._id4 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50), take transition Shield._id4->Shield._id4 { states == 1 && tv_p == Tv, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id15 Shield._id6 ) error=1 states=0 
+When you are in (ta_p==tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l0 mSpec_p.l2_p To._id7 Env._id15 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l2_p To._id7 Env._id13 Shield._id6 ) error=1 states=2 
+When you are in (ta_p==50 && 50<=tv_p), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+When you are in (ta_p<=50 && ta_p<=tv_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR mSpec_p.l1_p To._id7 Env._id13 Shield._id6 ) error=1 states=1 
+When you are in (tv_p<=50 && tv_p<=ta_p), take transition Shield._id6->Shield._id4 { error == 1, tau, 1 }
+
+State: ( mSpec.l1 mSpec_p.l2_p To._id7 Env._id13 Shield._id4 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && tv<=50), take transition Shield._id4->Shield._id4 { states == 2 && ta_p == Ta, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(tv<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id14 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && ta<=50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l2_p To._id7 Env._id14 Shield._id6 ) error=0 states=2 
+When you are in (ta_p==50 && 50<=tv_p && ta<=50), take transition Shield._id6->Shield._id4 { 1, VP_p!, 1 }
+mSpec_p.l2_p->mSpec_p.l1_p { ta_p == Ta, VP_p?, tv_p := 0, states := 1 }
+While you are in	(ta<=50 && ta_p<50 && ta_p<=tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l0_p To._id7 Env._id13 Shield._id6 ) error=0 states=0 
+While you are in	(tv<=50 && tv<=ta_p && ta_p==tv_p), wait.
+
+State: ( mSpec.l0 mSpec_p.l0_p To._id7 Env._id15 Shield._id6 ) error=0 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l1 mSpec_p.l1_p To._id7 Env._id14 Shield._id5 ) error=0 states=1 
+When you are in (50<=ta_p && tv_p==50 && tv<=50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(tv<=50 && tv_p<50 && tv_p<=ta_p), wait.
+
+State: ( mSpec.ERR mSpec_p.l0_p To._id7 Env._id15 Shield._id4 ) error=1 states=0 
+While you are in	(ta_p==tv_p), wait.
+
+State: ( mSpec.l2 mSpec_p.l1_p To._id7 Env._id13 Shield._id5 ) error=0 states=1 
+When you are in (ta==50 && 50<=ta_p && ta==tv_p && tv_p==50), take transition Shield._id5->Shield._id4 { 1, AP_p!, 1 }
+mSpec_p.l1_p->mSpec_p.l2_p { tv_p == Tv, AP_p?, ta_p := 0, states := 2 }
+While you are in	(ta<=50 && tv_p<50 && tv_p<=ta && tv_p<=ta_p), wait.

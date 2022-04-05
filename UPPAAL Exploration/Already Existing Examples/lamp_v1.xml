@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.   
+broadcast chan to;
+broadcast chan off, on, blink, off_p, blink_p;
+clock t;
+const int T=50;
+bool error;
+clock xs;
+int states=0;</declaration>
+	<template>
+		<name>mSpec</name>
+		<declaration>clock x;</declaration>
+		<location id="id0" x="-204" y="-34">
+			<name x="-255" y="-51">OFF</name>
+			<label kind="invariant" x="-229" y="-76">x&lt;=3</label>
+		</location>
+		<location id="id1" x="-68" y="-34">
+			<name x="-76" y="-68">ON</name>
+			<label kind="invariant" x="-51" y="-59">x&lt;=5</label>
+		</location>
+		<location id="id2" x="-68" y="59">
+			<name x="-102" y="68">ERR</name>
+		</location>
+		<init ref="id0"/>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-391" y="0">off?</label>
+			<label kind="assignment" x="-102" y="153">t=0, error=1</label>
+			<nail x="-399" y="42"/>
+			<nail x="-399" y="153"/>
+			<nail x="34" y="153"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-374" y="59">x&lt;1</label>
+			<label kind="synchronisation" x="-374" y="76">blink?</label>
+			<label kind="assignment" x="-110" y="119">t=0, error=1</label>
+			<nail x="-331" y="59"/>
+			<nail x="-331" y="136"/>
+			<nail x="-34" y="136"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-289" y="93">x&gt;=3</label>
+			<label kind="synchronisation" x="-289" y="76">to?</label>
+			<label kind="assignment" x="-127" y="93">t=0, error=1</label>
+			<nail x="-297" y="59"/>
+			<nail x="-297" y="119"/>
+			<nail x="-59" y="119"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="8" y="25">blink?</label>
+			<label kind="assignment" x="17" y="8">t=0, error=1</label>
+			<nail x="0" y="-34"/>
+			<nail x="0" y="34"/>
+			<nail x="0" y="59"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-136" y="-17">x&lt;1</label>
+			<label kind="synchronisation" x="-136" y="0">off?</label>
+			<label kind="assignment" x="-136" y="17">t=0, error=1</label>
+			<nail x="-110" y="-17"/>
+			<nail x="-110" y="59"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-59" y="17">x&gt;=5</label>
+			<label kind="synchronisation" x="-68" y="-5">to?</label>
+			<label kind="assignment" x="-59" y="0">t=0, error=1</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-221" y="51">x&gt;=1</label>
+			<label kind="synchronisation" x="-221" y="68">blink?</label>
+			<label kind="assignment" x="-221" y="85">x:=0</label>
+			<nail x="-187" y="51"/>
+			<nail x="-221" y="51"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-170" y="-33">x&gt;=1</label>
+			<label kind="synchronisation" x="-170" y="-17">off?</label>
+			<label kind="assignment" x="-170" y="0">x:=0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-161" y="-144">x&gt;=1</label>
+			<label kind="synchronisation" x="-161" y="-127">on?</label>
+			<label kind="assignment" x="-161" y="-110">x:=0</label>
+			<nail x="-136" y="-85"/>
+		</transition>
+	</template>
+	<template>
+		<name>mSpecp</name>
+		<location id="id3" x="-204" y="-34">
+			<name x="-255" y="-51">OFF</name>
+			<label kind="invariant" x="-214" y="-17">xs&lt;=3</label>
+		</location>
+		<location id="id4" x="-68" y="-34">
+			<name x="-76" y="-68">ON</name>
+			<label kind="invariant" x="-78" y="-17">xs&lt;=5</label>
+		</location>
+		<location id="id5" x="-68" y="59">
+			<name x="-102" y="68">ERR</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-391" y="0">off_p?</label>
+			<label kind="assignment" x="-408" y="8">states=2</label>
+			<nail x="-399" y="42"/>
+			<nail x="-399" y="153"/>
+			<nail x="34" y="153"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-374" y="59">xs&lt;1</label>
+			<label kind="synchronisation" x="-374" y="76">blink_p?</label>
+			<label kind="assignment" x="-374" y="42">states=2</label>
+			<nail x="-331" y="59"/>
+			<nail x="-331" y="136"/>
+			<nail x="-34" y="136"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-289" y="93">xs&gt;3</label>
+			<label kind="synchronisation" x="-289" y="76">to?</label>
+			<label kind="assignment" x="-297" y="59">states=2</label>
+			<nail x="-297" y="59"/>
+			<nail x="-297" y="119"/>
+			<nail x="-59" y="119"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="8" y="25">blink_p?</label>
+			<label kind="assignment" x="17" y="8">states=2</label>
+			<nail x="0" y="-34"/>
+			<nail x="0" y="34"/>
+			<nail x="0" y="59"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-102" y="-17">xs&lt;1</label>
+			<label kind="synchronisation" x="-102" y="0">off_p?</label>
+			<label kind="assignment" x="-110" y="21">states=2</label>
+			<nail x="-110" y="-17"/>
+			<nail x="-110" y="59"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-51" y="25">xs&gt;5</label>
+			<label kind="synchronisation" x="-51" y="-8">to?</label>
+			<label kind="assignment" x="-59" y="8">states=2</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-221" y="51">xs&gt;=1</label>
+			<label kind="synchronisation" x="-221" y="68">blink_p?</label>
+			<label kind="assignment" x="-221" y="85">xs:=0, states=0</label>
+			<nail x="-187" y="51"/>
+			<nail x="-221" y="51"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-170" y="-33">xs&gt;=1</label>
+			<label kind="synchronisation" x="-170" y="-17">off_p?</label>
+			<label kind="assignment" x="-187" y="0">xs:=0, states=0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-161" y="-144">xs&gt;=1</label>
+			<label kind="synchronisation" x="-161" y="-127">on?</label>
+			<label kind="assignment" x="-161" y="-110">xs:=0,states=1</label>
+			<nail x="-136" y="-85"/>
+		</transition>
+	</template>
+	<template>
+		<name>Shield</name>
+		<location id="id6" x="-102" y="136">
+			<committed/>
+		</location>
+		<location id="id7" x="34" y="0">
+		</location>
+		<location id="id8" x="-102" y="-136">
+			<committed/>
+		</location>
+		<init ref="id7"/>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="guard" x="93" y="76">states==1 &amp;&amp; xs==5</label>
+			<label kind="synchronisation" x="93" y="93">blink_p!</label>
+			<nail x="102" y="59"/>
+			<nail x="76" y="76"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="guard" x="127" y="17">states==0 &amp;&amp; xs==3</label>
+			<label kind="synchronisation" x="127" y="34">off_p!</label>
+			<nail x="102" y="-51"/>
+			<nail x="119" y="-17"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-59" y="59">error==1</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-76" y="-85">error==1</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-136" y="34">blink_p!</label>
+			<nail x="-68" y="34"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-34" y="119">error==0</label>
+			<label kind="synchronisation" x="-17" y="136">blink?</label>
+			<nail x="0" y="102"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-34" y="-136">off_p!</label>
+			<nail x="0" y="-102"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id7"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-136" y="-51">error==0</label>
+			<label kind="synchronisation" x="-102" y="-34">off?</label>
+			<nail x="-68" y="-34"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="guard" x="119" y="-59">error==1</label>
+			<label kind="synchronisation" x="119" y="-42">blink_p!</label>
+			<nail x="119" y="8"/>
+			<nail x="110" y="42"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="guard" x="59" y="-127">error==1</label>
+			<label kind="synchronisation" x="59" y="-110">off_p!</label>
+			<nail x="51" y="-85"/>
+			<nail x="85" y="-68"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="26" y="85">on?</label>
+			<nail x="17" y="85"/>
+			<nail x="51" y="85"/>
+		</transition>
+	</template>
+	<template>
+		<name>Env</name>
+		<location id="id9" x="0" y="0">
+		</location>
+		<init ref="id9"/>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="-7" y="76">on!</label>
+			<nail x="-25" y="93"/>
+			<nail x="34" y="93"/>
+		</transition>
+	</template>
+	<template>
+		<name>Sys</name>
+		<location id="id10" x="0" y="0">
+		</location>
+		<init ref="id10"/>
+		<transition controllable="false">
+			<source ref="id10"/>
+			<target ref="id10"/>
+			<label kind="synchronisation" x="85" y="-17">blink!</label>
+			<nail x="76" y="-34"/>
+			<nail x="76" y="25"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id10"/>
+			<target ref="id10"/>
+			<label kind="synchronisation" x="-102" y="-17">off!</label>
+			<nail x="-8" y="-8"/>
+			<nail x="-68" y="-34"/>
+			<nail x="-68" y="25"/>
+		</transition>
+	</template>
+	<template>
+		<name>TO</name>
+		<location id="id11" x="0" y="0">
+		</location>
+		<init ref="id11"/>
+		<transition controllable="false">
+			<source ref="id11"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-8" y="102">to!</label>
+			<nail x="-25" y="93"/>
+			<nail x="25" y="93"/>
+		</transition>
+	</template>
+	<system>
+// List one or more processes to be composed into a system.
+//system Env, Spec, FaultyImpl1, FaultyImpl2, M1, M2, M3, M4;
+system mSpec, mSpecp, Shield, Env, Sys, TO;</system>
+	<queries>
+		<query>
+			<formula>control: A[] not mSpecp.ERR</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>strategy REC = control: A[] not mSpecp.ERR and 
+                            ((not mSpec.ERR) or t&lt;=T or recovered)
+</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; sucessful ==1 under REC</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] (not mSpec.ERR) or mM1.ER1</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

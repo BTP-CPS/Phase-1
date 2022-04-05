@@ -1,0 +1,61 @@
+Initial state:
+( mSpec.A_sense Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.A_sense ) error=0 states=0 
+(#time==t && t==xp && xp==mSpec.x && mSpec.x==0)
+Note: The 'strategy' is not guaranteed to be a strategy.
+
+Strategy to avoid losing:
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.V_sense ) error=0 states=1 
+While you are in	(xp<50), wait.
+When you are in (xp==50), take transition Shield._id6->Shield._id6 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.V_sense ) error=1 states=1 
+While you are in	(xp<50), wait.
+When you are in (xp==50), take transition Shield._id6->Shield._id6 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50), take transition Shield._id6->Shield._id6 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.V_sense ) error=0 states=1 
+While you are in	(xp<50 && mSpec.x<=50), wait.
+When you are in (xp==50 && mSpec.x<=50), take transition Shield._id6->Shield._id6 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.A_sense ) error=0 states=0 
+While you are in	(mSpec.x<=50), wait.
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id7 To._id5 mSpec_p.V_sense ) error=0 states=1 
+While you are in	(xp<50 && mSpec.x<=50), wait.
+When you are in (xp==50 && mSpec.x<=50), take transition Shield._id7->Shield._id6 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id7 To._id5 mSpec_p.V_sense ) error=0 states=1 
+While you are in	(xp<50), wait.
+When you are in (xp==50), take transition Shield._id7->Shield._id6 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id7 To._id5 mSpec_p.A_sense ) error=0 states=0 
+When you are in (mSpec.x<=50), take transition Shield._id7->Shield._id6 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id7 To._id5 mSpec_p.A_sense ) error=1 states=0 
+When you are in true, take transition Shield._id7->Shield._id6 { error == 1, tau, 1 }
+When you are in true, take transition Shield._id7->Shield._id6 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id7 To._id5 mSpec_p.A_sense ) error=0 states=0 
+When you are in true, take transition Shield._id7->Shield._id6 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id7 To._id5 mSpec_p.V_sense ) error=1 states=1 
+When you are in (xp<=50), take transition Shield._id7->Shield._id6 { error == 1, tau, 1 }
+When you are in (xp==50), take transition Shield._id7->Shield._id6 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.A_sense ) error=0 states=0 
+While you are in	true, wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id6 To._id5 mSpec_p.A_sense ) error=1 states=0 
+When you are in true, take transition Shield._id6->Shield._id6 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }

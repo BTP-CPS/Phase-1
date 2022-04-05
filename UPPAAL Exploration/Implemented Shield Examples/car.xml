@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+broadcast chan frontPosAcc, frontZeroAcc, frontNegAcc, egoPosAcc, egoZeroAcc, egoNegAcc, egoPosAcc_p, egoZeroAcc_p, egoNegAcc_p;
+
+clock timer;
+const int maxVelocityEgo = 5;
+const int maxVelocityFront = 5;
+const int minVelocityEgo = -5;
+const int minVelocityFront = -5;
+
+const int maxDist = 15;
+const int minDist = 5;
+
+int states = 0;
+bool error = 0;
+
+int distance = 10;
+int d = 10;
+
+int velocityEgo = 0;
+int[-2,2] accelerationEgo;
+
+int velocityFront = 0;
+int[-2,2] accelerationFront;
+
+void check(){
+    int oldVel, newVel, tempVelocityEgo, tempVelocityFront;
+    oldVel = velocityFront - velocityEgo;
+
+    tempVelocityEgo = velocityEgo + accelerationEgo;
+    tempVelocityFront = velocityFront + accelerationFront;
+
+    newVel = tempVelocityEgo - tempVelocityFront;
+    
+    if (d &gt; maxDist) {
+        d = maxDist + 1;
+    } else {
+        d += (oldVel + newVel)/2;
+    }
+}
+
+void update(){
+    int oldVel, newVel;
+    oldVel = velocityFront - velocityEgo;
+
+    velocityEgo = velocityEgo + accelerationEgo;
+    velocityFront = velocityFront + accelerationFront;
+
+    newVel = velocityFront - velocityEgo;
+    
+    if (distance &gt; maxDist) {
+        distance = maxDist + 1;
+    } else {
+        distance += (oldVel + newVel)/2;
+    }
+    d = distance;
+}
+</declaration>
+	<template>
+		<name x="5" y="5">EgoFront</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-85" y="34">
+			<name x="-136" y="25">Front</name>
+		</location>
+		<location id="id1" x="102" y="34">
+		</location>
+		<location id="id2" x="297" y="34">
+		</location>
+		<location id="id3" x="450" y="34">
+			<label kind="invariant" x="425" y="-8">timer&lt;=1</label>
+		</location>
+		<init ref="id0"/>
+		<transition controllable="false">
+			<source ref="id3"/>
+			<target ref="id0"/>
+			<label kind="guard" x="153" y="212">timer==1</label>
+			<nail x="450" y="204"/>
+			<nail x="-85" y="204"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="348" y="34">timer:=0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="144" y="144">velocityEgo &gt; minVelocityEgo</label>
+			<label kind="synchronisation" x="170" y="110">egoNegAcc!</label>
+			<label kind="assignment" x="153" y="127">accelerationEgo = -2</label>
+			<nail x="204" y="110"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="161" y="8">egoZeroAcc!</label>
+			<label kind="assignment" x="136" y="34">accelerationEgo = 0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="144" y="-93">velocityEgo &lt; maxVelocityEgo</label>
+			<label kind="synchronisation" x="170" y="-76">egoPosAcc!</label>
+			<label kind="assignment" x="161" y="-110">accelerationEgo = 2</label>
+			<nail x="204" y="-51"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-76" y="144">velocityFront &gt; minVelocityFront</label>
+			<label kind="synchronisation" x="-26" y="110">frontNegAcc!</label>
+			<label kind="assignment" x="-59" y="127">accelerationFront = -2</label>
+			<nail x="8" y="110"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-34" y="8">frontZeroAcc!</label>
+			<label kind="assignment" x="-59" y="34">accelerationFront = 0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-93" y="-93">velocityFront &lt; maxVelocityFront</label>
+			<label kind="synchronisation" x="-42" y="-76">frontPosAcc!</label>
+			<label kind="assignment" x="-68" y="-110">accelerationFront = 2</label>
+			<nail x="0" y="-51"/>
+		</transition>
+	</template>
+	<template>
+		<name>mSpec</name>
+		<location id="id4" x="42" y="-51">
+			<name x="32" y="-85">ERR</name>
+		</location>
+		<location id="id5" x="-553" y="-51">
+			<name x="-604" y="-60">Front</name>
+		</location>
+		<location id="id6" x="-171" y="-51">
+			<committed/>
+		</location>
+		<location id="id7" x="-366" y="-51">
+		</location>
+		<init ref="id5"/>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-399" y="119">d &gt;= minDist &amp;&amp; d &lt;= maxDist</label>
+			<nail x="-59" y="68"/>
+			<nail x="-59" y="110"/>
+			<nail x="-552" y="110"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id6"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-144" y="-76">d &lt; minDist || d &gt; maxDist</label>
+			<label kind="assignment" x="-85" y="-51">error=1</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-324" y="59">velocityEgo &gt; minVelocityEgo</label>
+			<label kind="synchronisation" x="-298" y="25">egoNegAcc?</label>
+			<label kind="assignment" x="-323" y="42">accelerationEgo = -2, check()</label>
+			<nail x="-264" y="25"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-307" y="-77">egoZeroAcc?</label>
+			<label kind="assignment" x="-348" y="-34">accelerationEgo = 0, check()</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-324" y="-178">velocityEgo &lt; maxVelocityEgo</label>
+			<label kind="synchronisation" x="-298" y="-161">egoPosAcc?</label>
+			<label kind="assignment" x="-331" y="-195">accelerationEgo = 2, check()</label>
+			<nail x="-264" y="-136"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-544" y="59">velocityFront &gt; minVelocityFront</label>
+			<label kind="synchronisation" x="-494" y="25">frontNegAcc?</label>
+			<label kind="assignment" x="-527" y="42">accelerationFront = -2</label>
+			<nail x="-460" y="25"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-502" y="-77">frontZeroAcc?</label>
+			<label kind="assignment" x="-527" y="-51">accelerationFront = 0</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id5"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-561" y="-178">velocityFront &lt; maxVelocityFront</label>
+			<label kind="synchronisation" x="-510" y="-161">frontPosAcc?</label>
+			<label kind="assignment" x="-536" y="-195">accelerationFront = 2</label>
+			<nail x="-468" y="-136"/>
+		</transition>
+	</template>
+	<template>
+		<name>mSpec_p</name>
+		<location id="id8" x="33" y="-68">
+			<committed/>
+		</location>
+		<location id="id9" x="-349" y="-68">
+			<name x="-400" y="-77">Front</name>
+		</location>
+		<location id="id10" x="348" y="-68" color="#ffa500">
+			<name x="365" y="-76">ERR</name>
+		</location>
+		<location id="id11" x="-162" y="-68">
+		</location>
+		<init ref="id9"/>
+		<transition controllable="false">
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-246" y="102">distance &gt;= minDist &amp;&amp; distance &lt;= maxDist</label>
+			<label kind="assignment" x="-136" y="119">states=0</label>
+			<nail x="145" y="51"/>
+			<nail x="145" y="93"/>
+			<nail x="-348" y="93"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id8"/>
+			<target ref="id10"/>
+			<label kind="guard" x="59" y="-93">distance &lt; minDist || distance &gt; maxDist</label>
+			<label kind="assignment" x="119" y="-68">states=3</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-120" y="42">velocityEgo &gt; minVelocityEgo</label>
+			<label kind="synchronisation" x="-94" y="8">egoNegAcc_p?</label>
+			<label kind="assignment" x="-136" y="25">accelerationEgo = -2, states=2, update()</label>
+			<nail x="-60" y="8"/>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="-103" y="-94">egoZeroAcc_p?</label>
+			<label kind="assignment" x="-161" y="-51">accelerationEgo = 0, update(), states=2</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-120" y="-195">velocityEgo &lt; maxVelocityEgo</label>
+			<label kind="synchronisation" x="-94" y="-178">egoPosAcc_p?</label>
+			<label kind="assignment" x="-127" y="-212">accelerationEgo = 2, update(), states=2</label>
+			<nail x="-60" y="-153"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id11"/>
+			<label kind="guard" x="-357" y="42">velocityFront &gt; minVelocityFront</label>
+			<label kind="synchronisation" x="-290" y="8">frontNegAcc?</label>
+			<label kind="assignment" x="-365" y="25">accelerationFront = -2, states=1</label>
+			<nail x="-256" y="8"/>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-298" y="-94">frontZeroAcc?</label>
+			<label kind="assignment" x="-408" y="-51">accelerationFront = 0, states=1</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id9"/>
+			<target ref="id11"/>
+			<label kind="guard" x="-357" y="-195">velocityFront &lt; maxVelocityFront</label>
+			<label kind="synchronisation" x="-306" y="-178">frontPosAcc?</label>
+			<label kind="assignment" x="-357" y="-212">accelerationFront = 2, states=1</label>
+			<nail x="-264" y="-153"/>
+		</transition>
+	</template>
+	<template>
+		<name>Shield</name>
+		<location id="id12" x="-127" y="-51">
+		</location>
+		<location id="id13" x="-221" y="-161">
+		</location>
+		<location id="id14" x="-263" y="17">
+		</location>
+		<location id="id15" x="-76" y="76">
+		</location>
+		<init ref="id12"/>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<label kind="guard" x="0" y="-51">error==1</label>
+			<label kind="synchronisation" x="-8" y="-34">egoNegAcc_p!</label>
+			<nail x="-8" y="-59"/>
+			<nail x="-17" y="-8"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-85" y="-195">error==1</label>
+			<label kind="synchronisation" x="-68" y="-178">egoPosAcc_p!</label>
+			<nail x="-85" y="-161"/>
+			<nail x="-42" y="-136"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-8" y="-127">error==1</label>
+			<label kind="synchronisation" x="-8" y="-110">egoZeroAcc_p!</label>
+			<nail x="-25" y="-119"/>
+			<nail x="-8" y="-76"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="-59" y="34">egoNegAcc_p!</label>
+			<nail x="-59" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-127" y="0">error==1</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id15"/>
+			<label kind="guard" x="-170" y="68">error==0</label>
+			<label kind="synchronisation" x="-195" y="51">egoNegAcc?</label>
+			<nail x="-144" y="34"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="-280" y="34">egoZeroAcc_p!</label>
+			<nail x="-195" y="34"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-238" y="-17">error==1</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id14"/>
+			<label kind="guard" x="-297" y="-76">error==0</label>
+			<label kind="synchronisation" x="-340" y="-51">egoZeroAcc?</label>
+			<nail x="-238" y="-59"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="-323" y="-136">egoPosAcc_p!</label>
+			<nail x="-221" y="-85"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-204" y="-110">error==1</label>
+		</transition>
+		<transition controllable="false">
+			<source ref="id12"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-195" y="-195">error==0</label>
+			<label kind="synchronisation" x="-195" y="-178">egoPosAcc?</label>
+			<nail x="-136" y="-144"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+system EgoFront, mSpec, mSpec_p, Shield;   </system>
+	<queries>
+		<query>
+			<formula>strategy safe1 = control: A[] distance &gt;= 9 &amp;&amp; distance &lt;= 12</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>saveStrategy("car_distance.txt", safe1)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] distance &gt;= 5 &amp;&amp; distance &lt;= 15</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>strategy safe = control: A[] not mSpec_p.ERR</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>saveStrategy("car.txt", safe)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] distance &gt;= 5 &amp;&amp; distance &lt;= 15 under safe</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

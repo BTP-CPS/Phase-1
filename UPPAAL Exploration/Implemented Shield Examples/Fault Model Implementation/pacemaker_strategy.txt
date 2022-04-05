@@ -1,0 +1,251 @@
+Initial state:
+( mSpec.A_sense Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.A_sense1 Fm2.A_sense1 RM._id23 mSpec_p.A_sense ) error=0 recovered=0 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+(#time==t && t==xp && xp==xm1 && xm1==xm2 && xm2==x && x==0)
+Note: The 'strategy' is not guaranteed to be a strategy.
+
+Strategy to avoid losing:
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=2 statem2=2 statem3=0 statem4=0 successful=1 
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=2 statem2=2 statem3=0 statem4=0 successful=1 
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense2 Fm2.V_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=1 statem2=1 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense2 Fm2.V_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=1 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=2 statem2=1 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp==xm2 && xp<=x && xm1-x<50 && x<=xm1), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+When you are in (xp<=50 && xp==xm2 && xp<=x && xm1-x<50 && x<=xm1), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=1 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+While you are in	(xp<50 && xp==xm1 && xm1==xm2 && xm2==xp && x<=xp), wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=2 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.V_sense2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=1 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.V_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=2 statem2=1 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=0 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=2 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=2 statem2=2 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp==50 && 50<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp==50 && 50<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=50 && xp<=xm1 && xm1==xm2 && xm1<=x), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=1 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==xm1 && xp<=x && xm1==xm2 && xm2==xp && x<=50), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.A_sense1 Fm2.A_sense1 RM._id23 mSpec_p.A_sense ) error=0 recovered=0 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==xm1 && xm1==xm2 && xm2==x && x==xp), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.V_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=2 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=2 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=2 statem2=2 statem3=0 statem4=0 successful=0 
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=2 statem2=1 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp==xm2 && xp<=x && xm1-x<50 && x<=xm1), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=2 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50) || (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50) || (xp<=50 && xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=xp), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=2 statem2=2 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp==50 && 50<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=50 && xp<=xm1 && xm1==xm2 && xm1<=x), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+When you are in (xp<=50 && xp<=xm2 && xm1-x<50 && xm2<=x && x<=xm1) || (xp<=50 && xp<=xm1 && xm1==xm2 && xm1<=x), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=2 statem2=2 statem3=0 statem4=0 successful=0 
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.A_sense1 Fm2.A_sense1 RM._id23 mSpec_p.A_sense ) error=0 recovered=0 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+While you are in	(xp==xm1 && xm1==xm2 && xm2==x && x==xp), wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=0 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense1 Fm2.V_sense1 RM._id23 mSpec_p.A_sense ) error=0 recovered=0 states=0 statem1=1 statem2=1 statem3=0 statem4=0 successful=0 
+While you are in	(xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=2 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=2 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=x && xp==xm2 && xm1-x<50 && xm2==50 && x<=xm1), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense1 Fm2.V_sense1 RM._id23 mSpec_p.V_sense ) error=0 recovered=0 states=1 statem1=1 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+While you are in	(xp<50 && xp==xm1 && xm1==xm2 && xm2==x && x==xp), wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=2 statem2=2 statem3=0 statem4=0 successful=0 
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=2 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.A_sense Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.A_sense1 Fm2.A_sense1 RM._id23 mSpec_p.V_sense ) error=0 recovered=0 states=1 statem1=0 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=2 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50 && x<=xp), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50 && x<=xp), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50 && x<=xp), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.V_sense2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=1 statem2=1 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp==xm1 && xp<=x && xm1==xm2 && xm2==xp), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+When you are in (xp<=50 && xp==xm1 && xp<=x && xm1==xm2 && xm2==xp), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.ERR2 Fm2.ERR2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=2 statem2=2 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && statem2 == 2, tau, recovered := 1, successful := 1 }
+When you are in (xp<=xm2 && xm1-x<50 && xm2<=x && x<=50 && x<=xm1) || (xp<=xm1 && xm1==xm2 && xm1<=x && x<=50), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=1 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.A_sense2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=1 states=0 statem1=0 statem2=0 statem3=0 statem4=0 successful=1 
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+When you are in (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
+
+State: ( mSpec.V_sense Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.V_sense1 Fm2.V_sense1 RM._id23 mSpec_p.V_sense ) error=0 recovered=0 states=1 statem1=1 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+While you are in	(xp<50 && xp==xm1 && xm1==xm2 && xm2==x && x==xp), wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.A_sense ) error=1 recovered=0 states=0 statem1=2 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50 && x<=xp), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.A_sense->mSpec_p.A_sense { 1, AP_p?, states := 0 }
+When you are in (xp==xm2 && xp<=x && xm1-x<50 && x<=50 && x<=xm1) || (xp==xm1 && xp-x<50 && xm1==xm2 && xm2==xp && x<=50 && x<=xp), take transition RM._id23->RM._id23 { error == 1 && statem1 == 2 && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.ERR2 Fm2.A_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=2 statem2=0 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50) || (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=xm1 && xp==xm2 && xm1<100 && xm2==x && x==50) || (xp==50 && 0<x && xp==xm1 && xm1==xm2 && xm2==50 && x<=50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+While you are in	(xp<50 && xp==xm1 && xm1==xm2 && xm2==xp && x<=xp), wait.
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id18 To._id17 Fm1.V_sense2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=1 states=1 statem1=1 statem2=1 statem3=0 statem4=0 successful=1 
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id18->Shield._id18 { error == 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==50 && 50<=x && xp==xm1 && xm1==xm2 && xm2==50), take transition Shield._id18->Shield._id18 { states == 1 && xp == T, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp<=50 && xp==xm1 && xp<=x && xm1==xm2 && xm2==xp), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+
+State: ( mSpec.ERR Env._id0 Sys._id1 Shield._id19 To._id17 Fm1.V_sense2 Fm2.V_sense2 RM._id23 mSpec_p.V_sense ) error=1 recovered=0 states=1 statem1=1 statem2=1 statem3=0 statem4=0 successful=0 
+When you are in (xp==50 && xp==xm1 && xm1==xm2 && xm2==x && x==50), take transition Shield._id19->Shield._id18 { 1, AP_p!, 1 }
+mSpec_p.V_sense->mSpec_p.A_sense { xp == T, AP_p?, states := 0 }
+When you are in (xp==xm1 && xp<=x && xm1==xm2 && xm2==xp && x<=50), take transition RM._id23->RM._id23 { error == 1 && (statem1 == states && xm1 == xp) && (statem2 == states && xm2 == xp), tau, recovered := 1, successful := 1 }
+When you are in (xp==xm1 && xp<=x && xm1==xm2 && xm2==xp && x<=50), take transition Shield._id19->Shield._id18 { error == 1, tau, 1 }
